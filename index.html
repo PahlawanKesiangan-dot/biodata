@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata Nando - Neon Universe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap');
+
+        * { box-sizing: border-box; cursor: crosshair; }
+        body {
+            margin: 0; padding: 0;
+            background-color: #050505;
+            color: #ecf0f1;
+            font-family: 'Space Mono', monospace;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* --- GLITCH OVERLAY --- */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 100;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        #particles-container {
+            position: fixed; width: 100%; height: 100%;
+            top: 0; left: 0; z-index: -1;
+        }
+        .particle {
+            position: absolute; background: #0ff;
+            border-radius: 50%; opacity: 0.5;
+            animation: float 10s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) translateX(20vw); opacity: 0; }
+        }
+
+        .card {
+            width: 95%; max-width: 500px;
+            max-height: 85vh;
+            background: rgba(10, 10, 10, 0.7);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            text-align: center;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .neon-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5em; color: #fff;
+            text-shadow: 0 0 10px #0ff;
+            margin: 0;
+            animation: glitch 3s infinite;
+        }
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px #ff00ff, -2px -2px #0ff; }
+            2% { text-shadow: -2px 2px #ff00ff, 2px -2px #0ff; }
+            4% { text-shadow: 2px -2px #ff00ff, -2px 2px #0ff; }
+            6% { text-shadow: 0 0 10px #0ff; }
+            100% { text-shadow: 0 0 10px #0ff; }
+        }
+
+        .subtitle { color: #0ff; letter-spacing: 5px; font-size: 0.8em; margin-bottom: 25px; text-transform: uppercase; }
+
+        .music-player {
+            margin-bottom: 20px;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 1px dashed #0ff;
+        }
+        .music-player button {
+            background: transparent; border: 1px solid #0ff; color: #0ff;
+            border-radius: 50%; width: 30px; height: 30px; cursor: pointer;
+        }
+
+        .info-section { text-align: left; }
+        .info-item { margin-bottom: 15px; padding-left: 15px; border-left: 2px solid rgba(0, 255, 255, 0.3); }
+        .label { color: #0ff; font-weight: bold; display: block; font-size: 0.7em; text-transform: uppercase; opacity: 0.8; }
+        .value { font-size: 1em; color: #fff; }
+
+        .typing { display: inline-block; overflow: hidden; white-space: nowrap; border-right: 2px solid #0ff; animation: typing 4s steps(40, end), blink .75s step-end infinite; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink { from, to { border-color: transparent } 50% { border-color: #0ff } }
+
+        .badge-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .badge { background: rgba(0, 255, 255, 0.05); border: 1px solid rgba(0, 255, 255, 0.4); padding: 5px 12px; border-radius: 5px; font-size: 0.75em; color: #0ff; transition: 0.3s; }
+        .badge:hover { background: #0ff; color: #000; box-shadow: 0 0 20px #0ff; }
+
+        .terminal {
+            margin-top: 20px;
+            background: #000;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: left;
+            font-size: 0.75em;
+            color: #0f0;
+            border: 1px solid #333;
+        }
+        .terminal-line::before { content: "C:\\Nando\\Heart> "; color: #0ff; }
+
+        .footer { margin-top: 20px; font-size: 0.65em; color: #555; font-style: italic; }
+        .card::-webkit-scrollbar { width: 4px; }
+        .card::-webkit-scrollbar-thumb { background: #0ff; }
+    </style>
+</head>
+<body>
+
+    <div id="particles-container"></div>
+
+    <audio id="myAudio" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="card">
+        <h1 class="neon-title">NANDO</h1>
+        <p class="subtitle">Hacking Master</p>
+
+        <div class="music-player">
+            <span style="font-size: 0.7em; color: #0ff;">VIBE: ON</span>
+            <button onclick="toggleAudio()" id="playBtn">▶</button>
+        </div>
+
+        <div class="info-section">
+            <div class="info-item">
+                <span class="label">📍 Biodata</span>
+                <span class="value">Ananda Surya Y. | Sidoarjo</span>
+            </div>
+            
+            <div class="info-item">
+                <span class="label">🛡️ Status</span>
+                <span class="value">Logic: 100% | Faith: 60% | Heart: <span style="color: #ff00ff;">ERR 404</span></span>
+            </div>
+
+            <div class="info-item">
+                <span class="label">🎓 Log Akamedik</span>
+                <span class="value typing">SD (2019-2024)</span>
+                <span class="value typing">SMP (2024 - Active)</span>
+            </div>
+
+            <div class="info-item">
+                <span class="label">🏆 Penghargaan</span>
+                <div class="badge-container">
+                    <div class="badge" onclick="window.open('https://efeindonesia.com/', '_blank')" style="cursor: pointer;">
+                        4x EFE Graduate (English)
+                    </div>
+                    <div class="badge" onclick="window.open('https://linktr.ee/jadihacker.id', '_blank')" style="cursor: pointer;">
+                        JH SOC B10 (CyberSec)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="terminal">
+            <div class="terminal-line">run memory_cleanup.exe</div>
+            <div class="terminal-line" style="color: #f00;">Error: Access Denied. File is protected.</div>
+            <div class="terminal-line">help --how-to-forget</div>
+            <div class="terminal-line">System: Command not found.</div>
+            <div class="terminal-line">_</div>
+        </div>
+
+        <div class="footer">
+            "Sistem bisa di-patch, tapi memori seringkali read-only."
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById("myAudio");
+        const btn = document.getElementById("playBtn");
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                btn.innerText = "⏸";
+            } else {
+                audio.pause();
+                btn.innerText = "▶";
+            }
+        }
+
+        const container = document.getElementById('particles-container');
+        for (let i = 0; i < 40; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.top = Math.random() * 100 + 'vh';
+            p.style.width = p.style.height = Math.random() * 3 + 'px';
+            p.style.animationDelay = Math.random() * 10 + 's';
+            p.style.animationDuration = (Math.random() * 5 + 7) + 's';
+            container.appendChild(p);
+        }
+    </script>
+</body>
+</html>
