@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nando | Neon Universe</title>
+    <title>Nando | Neon Universe Landscape</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap');
 
@@ -14,10 +14,10 @@
             color: #0ff;
             font-family: 'Space Mono', monospace;
             display: flex; justify-content: center; align-items: center; min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        /* Efek Glitch TV Rusak */
+        /* Overlay Glitch TV */
         body::before {
             content: " "; display: block; position: absolute;
             top: 0; left: 0; bottom: 0; right: 0;
@@ -25,101 +25,135 @@
             z-index: 100; background-size: 100% 2px, 3px 100%; pointer-events: none;
         }
 
-        .container {
-            width: 100%; max-width: 450px;
-            background: rgba(10, 10, 10, 0.8);
-            border-left: 4px solid #0ff;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+        /* Container Landscape */
+        .main-frame {
+            display: flex;
+            width: 90%;
+            max-width: 1000px;
+            height: 550px;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid #0ff;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+            overflow: hidden;
             position: relative;
+            z-index: 10;
         }
 
-        h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5em; margin: 0; letter-spacing: 5px; text-shadow: 0 0 15px #0ff; }
-        .subtitle { font-size: 0.9em; letter-spacing: 3px; margin-bottom: 30px; opacity: 0.8; }
+        /* Sisi Kiri: Profil & Status */
+        .side-profile {
+            flex: 1;
+            padding: 40px;
+            border-right: 1px dashed rgba(0, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-        .info-section { margin-bottom: 25px; text-align: left; }
-        .label { font-size: 0.7em; color: #f0f; display: block; margin-bottom: 5px; text-transform: uppercase; }
-        .value { font-size: 1.1em; color: #fff; }
+        /* Sisi Kanan: Terminal & Links */
+        .side-content {
+            flex: 1.5;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-        .links { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-        
-        /* Tombol Neon */
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 3em; margin: 0; text-shadow: 0 0 20px #0ff; }
+        .role { color: #f0f; font-size: 0.8em; letter-spacing: 5px; margin-bottom: 30px; }
+
+        .data-row { margin-bottom: 15px; }
+        .label { font-size: 0.6em; opacity: 0.6; text-transform: uppercase; display: block; }
+        .value { font-size: 1em; color: #fff; }
+
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .neon-btn {
             border: 1px solid #0ff;
-            padding: 12px;
+            padding: 10px;
+            text-align: center;
             text-decoration: none;
             color: #0ff;
-            text-align: center;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8em;
+            font-size: 0.7em;
             transition: 0.3s;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
+            cursor: pointer;
         }
-        .neon-btn:hover {
-            background: #0ff; color: #000;
-            box-shadow: 0 0 20px #0ff;
-            transform: scale(1.03);
-        }
+        .neon-btn:hover { background: #0ff; color: #000; box-shadow: 0 0 15px #0ff; }
 
-        .terminal {
-            background: rgba(0, 0, 0, 0.5);
+        .terminal-box {
+            background: rgba(0, 0, 0, 0.6);
             padding: 15px;
-            margin-top: 30px;
-            font-size: 0.8em;
-            border-radius: 5px;
+            font-size: 0.75em;
             color: #0f0;
-            text-align: left;
+            border-radius: 5px;
+            height: 150px;
+            overflow-y: auto;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>NANDO</h1>
-        <div class="subtitle">HACKING MASTER</div>
-
-        <div class="info-section">
-            <span class="label">📍 BIODATA</span>
-            <span class="value">Ananda Surya Y. | Sidoarjo</span>
-        </div>
-
-        <div class="info-section">
-            <span class="label">🛡️ STATUS SISTEM</span>
-            <span class="value">Logika: 100% | Iman: 60% | Hati: <span style="color: #f00;">ERR 404</span></span>
-        </div>
-
-        <div class="info-section">
-            <span class="label">🎓 LOG AKADEMIK</span>
-            <span class="value">SD (2019-2024) | SMP (2024 - Aktif)</span>
-        </div>
-
-        <div class="links">
-            <a href="https://printer-nando.vercel.app/" target="_blank" class="neon-btn">
-                <span>📠</span> SISTEM PRINTER NANDO
-            </a>
+    <div class="main-frame">
+        <div class="side-profile">
+            <h1>NANDO</h1>
+            <div class="role">HACKING MASTER</div>
             
-            <a href="https://nando-short.vercel.app/?id=ig" target="_blank" class="neon-btn">
-                <span>🔗</span> PORTAL INSTAGRAM
-            </a>
+            <div class="data-row">
+                <span class="label">BIODATA</span>
+                <span class="value">Ananda Surya Y. | Sidoarjo</span>
+            </div>
 
-            <div style="display: flex; gap: 10px;">
-                <div class="neon-btn" style="flex: 1; font-size: 0.6em;">4x EFE GRADUATE</div>
-                <div class="neon-btn" style="flex: 1; font-size: 0.6em;">JH SOC B10</div>
+            <div class="data-row">
+                <span class="label">STATUS</span>
+                <span class="value">Hati: <span style="color: #f00;">ERR 404</span> | Iman: 60%</span>
+            </div>
+
+            <div class="data-row">
+                <span class="label">PENDIDIKAN</span>
+                <span class="value">SMP (2024 - SEKARANG)</span>
             </div>
         </div>
 
-        <div class="terminal">
-            C:\Nando\Heart> run bersihkan_memori.exe <br>
-            C:\Nando\Heart> Error: Akses Ditolak. File diproteksi. <br>
-            C:\Nando\Heart> help --cara-melupakan <br>
-            C:\Nando\Heart> Sistem: Perintah tidak ditemukan. <br>
-            <span style="color: #fff; opacity: 0.5; font-style: italic; font-size: 0.8em;">
-                "Sistem bisa di-patch, tapi memori seringkali read-only."
-            </span>
+        <div class="side-content">
+            <div class="btn-grid">
+                <a href="https://printer-nando.vercel.app/" target="_blank" class="neon-btn" style="grid-column: span 2;">📠 SISTEM PRINTER NANDO</a>
+                <a href="https://nando-short.vercel.app/?id=ig" target="_blank" class="neon-btn" style="grid-column: span 2;">🔗 PORTAL INSTAGRAM</a>
+                
+                <div onclick="bukaEFE()" class="neon-btn">🏆 4x EFE GRADUATE</div>
+                <div onclick="bukaJH()" class="neon-btn">🛡️ JH SOC B10</div>
+            </div>
+
+            <div class="terminal-box" id="terminal">
+                C:\Nando\System> Booting... <br>
+                C:\Nando\System> Menghubungkan ke pusat data... <br>
+                C:\Nando\System> Selamat datang, Master. <br>
+                _
+            </div>
         </div>
     </div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+
+        function logTerminal(msg) {
+            terminal.innerHTML += `<br>C:\\Nando\\Award> ${msg}`;
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        function bukaEFE() {
+            logTerminal("Membuka Portal English For Everyone...");
+            setTimeout(() => {
+                window.open('https://efeindonesia.com/', '_blank');
+            }, 500);
+        }
+
+        function bukaJH() {
+            logTerminal("Membuka Portal JadiHacker...");
+            setTimeout(() => {
+                window.open('https://jadihacker.com/', '_blank');
+            }, 500);
+        }
+    </script>
 
 </body>
 </html>
