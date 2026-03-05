@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nando | Neon Universe Landscape</title>
+    <title>Nando | Neon Universe Responsive</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap');
 
@@ -14,7 +14,7 @@
             color: #0ff;
             font-family: 'Space Mono', monospace;
             display: flex; justify-content: center; align-items: center; min-height: 100vh;
-            overflow: hidden;
+            overflow: hidden; /* Desktop tetep no scroll biar efek glitch aman */
         }
 
         /* Overlay Glitch TV */
@@ -25,7 +25,7 @@
             z-index: 100; background-size: 100% 2px, 3px 100%; pointer-events: none;
         }
 
-        /* Container Landscape */
+        /* Container Utama */
         .main-frame {
             display: flex;
             width: 90%;
@@ -66,7 +66,7 @@
         .label { font-size: 0.6em; opacity: 0.6; text-transform: uppercase; display: block; }
         .value { font-size: 1em; color: #fff; }
 
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .neon-btn {
             border: 1px solid #0ff;
             padding: 10px;
@@ -77,6 +77,7 @@
             font-size: 0.7em;
             transition: 0.3s;
             cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
         }
         .neon-btn:hover { background: #0ff; color: #000; box-shadow: 0 0 15px #0ff; }
 
@@ -86,8 +87,38 @@
             font-size: 0.75em;
             color: #0f0;
             border-radius: 5px;
-            height: 150px;
+            min-height: 120px;
             overflow-y: auto;
+        }
+
+        /* 📱 MEDIA QUERY: RESPONSIVE UNTUK HP (Lebar layar di bawah 768px) */
+        @media (max-width: 768px) {
+            body {
+                overflow-y: auto; /* Izinkan scroll vertikal di HP */
+                align-items: flex-start; /* Konten nempel atas biar gak kepotong */
+                padding: 20px 0;
+            }
+            .main-frame {
+                flex-direction: column; /* Ubah orientasi jadi numpuk ke bawah */
+                height: auto; /* Tingginya ngikutin isi konten */
+                min-height: 90vh;
+                overflow: visible;
+            }
+            .side-profile {
+                border-right: none; /* Hapus garis pembatas kanan */
+                border-bottom: 1px dashed rgba(0, 255, 255, 0.3); /* Pindah jadi garis bawah */
+                padding: 25px;
+            }
+            .side-content {
+                padding: 25px;
+            }
+            h1 { font-size: 2.2em; } /* Kecilin font sedikit di HP */
+            .btn-grid { 
+                grid-template-columns: 1fr; /* Tombol jadi satu kolom penuh ke bawah */ 
+            }
+            .neon-btn[style*="grid-column"] { 
+                grid-column: span 1 !important; /* Timpa paksa grid span di HP */
+            }
         }
     </style>
 </head>
@@ -100,17 +131,16 @@
             
             <div class="data-row">
                 <span class="label">BIODATA</span>
-                <span class="value">Ananda Surya Y. | SBY x SDA</span>
+                <span class="value">Ananda Surya Y. | Sidoarjo</span>
             </div>
 
             <div class="data-row">
                 <span class="label">STATUS</span>
-                <span class="value">Logic 100% | Iman 65% | Hati: <span style="color: #f00;">ERR 404</span>
+                <span class="value">Hati: <span style="color: #f00;">ERR 404</span> | Iman: 60%</span>
             </div>
 
             <div class="data-row">
                 <span class="label">PENDIDIKAN</span>
-                <span class="value">SD (2019 - 2024)</span>
                 <span class="value">SMP (2024 - SEKARANG)</span>
             </div>
         </div>
@@ -118,7 +148,7 @@
         <div class="side-content">
             <div class="btn-grid">
                 <a href="https://printer-nando.vercel.app/" target="_blank" class="neon-btn" style="grid-column: span 2;">📠 SISTEM PRINTER NANDO</a>
-                <a href="https://www.instagram.com/offcial_nando_03/" target="_blank" class="neon-btn" style="grid-column: span 2;">🔗 PORTAL INSTAGRAM</a>
+                <a href="https://nando-short.vercel.app/?id=ig" target="_blank" class="neon-btn" style="grid-column: span 2;">🔗 PORTAL INSTAGRAM</a>
                 
                 <div onclick="bukaEFE()" class="neon-btn">🏆 4x EFE GRADUATE</div>
                 <div onclick="bukaJH()" class="neon-btn">🛡️ JH SOC B10</div>
@@ -151,12 +181,10 @@
         function bukaJH() {
             logTerminal("Membuka Portal JadiHacker...");
             setTimeout(() => {
-                window.open('https://linktr.ee/jadihacker.id/', '_blank');
+                window.open('https://jadihacker.com/', '_blank');
             }, 500);
         }
     </script>
 
 </body>
 </html>
-
-
