@@ -3,188 +3,663 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nando | Neon Universe Responsive</title>
+    <title>NANDO | HACKING MASTER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        * { box-sizing: border-box; cursor: crosshair; }
+        :root {
+            --neon-green: #0f0;
+            --neon-cyan: #0ff;
+            --neon-pink: #f0f;
+            --neon-yellow: #ff0;
+            --dark-bg: #0a0a0a;
+            --glow-green: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
+            --glow-cyan: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff;
+            --glow-pink: 0 0 10px #f0f, 0 0 20px #f0f, 0 0 40px #f0f;
+        }
+
         body {
-            margin: 0; padding: 0;
-            background-color: #050505;
-            color: #0ff;
-            font-family: 'Space Mono', monospace;
-            display: flex; justify-content: center; align-items: center; min-height: 100vh;
-            overflow: hidden; /* Desktop tetep no scroll biar efek glitch aman */
-        }
-
-        /* Overlay Glitch TV */
-        body::before {
-            content: " "; display: block; position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 100; background-size: 100% 2px, 3px 100%; pointer-events: none;
-        }
-
-        /* Container Utama */
-        .main-frame {
-            display: flex;
-            width: 90%;
-            max-width: 1000px;
-            height: 550px;
-            background: rgba(10, 10, 10, 0.9);
-            border: 1px solid #0ff;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-            overflow: hidden;
+            font-family: 'Share Tech Mono', monospace;
+            background-color: var(--dark-bg);
+            color: var(--neon-green);
+            min-height: 100vh;
+            overflow-x: hidden;
             position: relative;
-            z-index: 10;
         }
 
-        /* Sisi Kiri: Profil & Status */
-        .side-profile {
-            flex: 1;
-            padding: 40px;
-            border-right: 1px dashed rgba(0, 255, 255, 0.3);
+        /* Matrix Rain Background */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Glitch Effect */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes glitch2 {
+            0% { transform: translate(0); }
+            20% { transform: translate(2px, -2px); }
+            40% { transform: translate(2px, 2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(-2px, 2px); }
+            100% { transform: translate(0); }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
+            align-items: center;
             justify-content: center;
+            min-height: 100vh;
         }
 
-        /* Sisi Kanan: Terminal & Links */
-        .side-content {
-            flex: 1.5;
-            padding: 40px;
+        /* Avatar Section */
+        .avatar-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--neon-green);
+            box-shadow: var(--glow-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 60px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 10px #0f0, 0 0 20px #0f0; }
+            50% { box-shadow: 0 0 20px #0f0, 0 0 40px #0f0, 0 0 60px #0f0; }
+        }
+
+        .avatar-ring {
+            position: absolute;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            border: 2px dashed var(--neon-cyan);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Main Title */
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            color: var(--neon-green);
+            text-shadow: var(--glow-green);
+            margin-bottom: 10px;
+            animation: glitch 3s infinite;
+            position: relative;
+        }
+
+        .main-title::before {
+            content: 'NANDO';
+            position: absolute;
+            left: 2px;
+            text-shadow: -1px 0 var(--neon-pink);
+            top: 0;
+            color: var(--neon-green);
+            animation: glitch2 3s infinite;
+            opacity: 0.8;
+        }
+
+        .main-title::after {
+            content: 'NANDO';
+            position: absolute;
+            left: -2px;
+            text-shadow: 1px 0 var(--neon-cyan);
+            top: 0;
+            color: var(--neon-green);
+            animation: glitch2 3s infinite;
+            opacity: 0.8;
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            text-shadow: var(--glow-cyan);
+            letter-spacing: 8px;
+            margin-bottom: 40px;
+            animation: flicker 2s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+            92% { opacity: 1; }
+            94% { opacity: 0.3; }
+            96% { opacity: 1; }
+        }
+
+        /* Info Box */
+        .info-box {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid var(--neon-green);
+            box-shadow: var(--glow-green), inset 0 0 30px rgba(0, 255, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .info-box h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--neon-green);
+            border-bottom: 1px solid var(--neon-green);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--neon-cyan);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .info-value {
+            color: var(--neon-green);
+            font-weight: bold;
+            text-align: right;
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .progress-item {
+            margin-bottom: 20px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid var(--neon-green);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
+            box-shadow: 0 0 10px var(--neon-green);
+            animation: progressGlow 2s infinite;
+        }
+
+        @keyframes progressGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+        }
+
+        /* Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .skill-tag {
+            padding: 12px 25px;
+            background: transparent;
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+            animation: skillPulse 2s infinite;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-tag:hover {
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+            transform: scale(1.05);
+        }
+
+        .skill-tag:nth-child(2) {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .skill-tag:nth-child(2):hover {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-cyan);
+        }
+
+        @keyframes skillPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Social Media & Awards */
+        .links-container {
+            width: 100%;
+            max-width: 600px;
             display: flex;
             flex-direction: column;
+            gap: 20px;
+        }
+
+        .link-box {
+            display: flex;
+            align-items: center;
             justify-content: space-between;
-        }
-
-        h1 { font-family: 'Orbitron', sans-serif; font-size: 3em; margin: 0; text-shadow: 0 0 20px #0ff; }
-        .role { color: #f0f; font-size: 0.8em; letter-spacing: 5px; margin-bottom: 30px; }
-
-        .data-row { margin-bottom: 15px; }
-        .label { font-size: 0.6em; opacity: 0.6; text-transform: uppercase; display: block; }
-        .value { font-size: 1em; color: #fff; }
-
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .neon-btn {
-            border: 1px solid #0ff;
-            padding: 10px;
-            text-align: center;
+            padding: 20px;
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
             text-decoration: none;
-            color: #0ff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .link-box:hover::before {
+            left: 100%;
+        }
+
+        .link-box:hover {
+            transform: translateX(10px);
+            box-shadow: 0 0 30px var(--neon-cyan);
+        }
+
+        .link-box.pink {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+        .link-box.pink:hover {
+            box-shadow: 0 0 30px var(--neon-pink);
+        }
+
+        .link-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .link-text {
+            flex: 1;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.7em;
-            transition: 0.3s;
-            cursor: pointer;
-            display: flex; justify-content: center; align-items: center;
-        }
-        .neon-btn:hover { background: #0ff; color: #000; box-shadow: 0 0 15px #0ff; }
-
-        .terminal-box {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 15px;
-            font-size: 0.75em;
-            color: #0f0;
-            border-radius: 5px;
-            min-height: 120px;
-            overflow-y: auto;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        /* 📱 MEDIA QUERY: RESPONSIVE UNTUK HP (Lebar layar di bawah 768px) */
-        @media (max-width: 768px) {
-            body {
-                overflow-y: auto; /* Izinkan scroll vertikal di HP */
-                align-items: flex-start; /* Konten nempel atas biar gak kepotong */
-                padding: 20px 0;
+        .link-box.pink .link-text {
+            color: var(--neon-pink);
+        }
+
+        .link-arrow {
+            color: var(--neon-green);
+            font-size: 1.2rem;
+            animation: arrowPulse 1.5s infinite;
+        }
+
+        @keyframes arrowPulse {
+            0%, 100% { transform: translateX(0); opacity: 1; }
+            50% { transform: translateX(5px); opacity: 0.5; }
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: rgba(0, 255, 0, 0.5);
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+        }
+
+        .footer span {
+            color: var(--neon-pink);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Typing Effect */
+        .typing-effect {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(30, end);
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 2.5rem;
+                letter-spacing: 5px;
             }
-            .main-frame {
-                flex-direction: column; /* Ubah orientasi jadi numpuk ke bawah */
-                height: auto; /* Tingginya ngikutin isi konten */
-                min-height: 90vh;
-                overflow: visible;
+            
+            .subtitle {
+                font-size: 1rem;
+                letter-spacing: 4px;
             }
-            .side-profile {
-                border-right: none; /* Hapus garis pembatas kanan */
-                border-bottom: 1px dashed rgba(0, 255, 255, 0.3); /* Pindah jadi garis bawah */
-                padding: 25px;
+            
+            .info-box {
+                padding: 20px;
             }
-            .side-content {
-                padding: 25px;
-            }
-            h1 { font-size: 2.2em; } /* Kecilin font sedikit di HP */
-            .btn-grid { 
-                grid-template-columns: 1fr; /* Tombol jadi satu kolom penuh ke bawah */ 
-            }
-            .neon-btn[style*="grid-column"] { 
-                grid-column: span 1 !important; /* Timpa paksa grid span di HP */
+            
+            .link-box {
+                padding: 15px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Matrix Rain Canvas -->
+    <canvas class="matrix-bg" id="matrix"></canvas>
 
-    <div class="main-frame">
-        <div class="side-profile">
-            <h1>NANDO</h1>
-            <div class="role">HACKING MASTER</div>
+    <div class="container">
+        <!-- Avatar -->
+        <div class="avatar-container">
+            <div class="avatar-ring"></div>
+            <div class="avatar">N</div>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="main-title typing-effect">NANDO</h1>
+        
+        <!-- Subtitle -->
+        <p class="subtitle">_ HACKING MASTER _</p>
+
+        <!-- Personal Info -->
+        <div class="info-box">
+            <h2>// SYSTEM INFORMATION</h2>
             
-            <div class="data-row">
-                <span class="label">BIODATA</span>
-                <span class="value">Ananda Surya Y. | Sidoarjo</span>
+            <div class="info-item">
+                <span class="info-label">> Nama Lengkap</span>
+                <span class="info-value">Ananda Surya Y.</span>
             </div>
-
-            <div class="data-row">
-                <span class="label">STATUS</span>
-                <span class="value">Hati: <span style="color: #f00;">ERR 404</span> | Iman: 60%</span>
-            </div>
-
-            <div class="data-row">
-                <span class="label">PENDIDIKAN</span>
-                <span class="value">SMP (2024 - SEKARANG)</span>
+            
+            <div class="info-item">
+                <span class="info-label">> Location</span>
+                <span class="info-value">Sidoarjo</span>
             </div>
         </div>
 
-        <div class="side-content">
-            <div class="btn-grid">
-                <a href="https://printer-nando.vercel.app/" target="_blank" class="neon-btn" style="grid-column: span 2;">📠 SISTEM PRINTER NANDO</a>
-                <a href="https://nando-short.vercel.app/?id=ig" target="_blank" class="neon-btn" style="grid-column: span 2;">🔗 PORTAL INSTAGRAM</a>
+        <!-- Progress Stats -->
+        <div class="info-box">
+            <h2>// SYSTEM STATUS</h2>
+            
+            <div class="progress-container">
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>> Logic</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
                 
-                <div onclick="bukaEFE()" class="neon-btn">🏆 4x EFE GRADUATE</div>
-                <div onclick="bukaJH()" class="neon-btn">🛡️ JH SOC B10</div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>> Faith</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="terminal-box" id="terminal">
-                C:\Nando\System> Booting... <br>
-                C:\Nando\System> Menghubungkan ke pusat data... <br>
-                C:\Nando\System> Selamat datang, Master. <br>
-                _
+        <!-- Skills -->
+        <div class="info-box">
+            <h2>// SKILL SET</h2>
+            <div class="skills-container">
+                <div class="skill-tag">HACKER</div>
+                <div class="skill-tag">PROGRAMMER</div>
             </div>
+        </div>
+
+        <!-- Social Media & Awards -->
+        <div class="links-container">
+            <h2 style="font-family: 'Orbitron', sans-serif; color: var(--neon-green); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px;">// CONNECTIONS</h2>
+            
+            <a href="https://www.instagram.com/offcial_nando_03/" target="_blank" class="link-box">
+                <span class="link-icon">📷</span>
+                <span class="link-text">Instagram</span>
+                <span class="link-arrow">►</span>
+            </a>
+            
+            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--neon-pink); text-transform: uppercase; letter-spacing: 2px; margin: 20px 0 10px 0; font-size: 0.9rem;">// Penghargaan</h3>
+            
+            <a href="https://efeindonesia.com/" target="_blank" class="link-box pink">
+                <span class="link-icon">🏆</span>
+                <span class="link-text">4x EFE Graduate</span>
+                <span class="link-arrow">►</span>
+            </a>
+            
+            <a href="https://linktr.ee/jadihacker.id" target="_blank" class="link-box pink">
+                <span class="link-icon">🎖️</span>
+                <span class="link-text">JH SOC B10</span>
+                <span class="link-arrow">►</span>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            SYSTEM ONLINE <span>●</span> ALL SYSTEMS OPERATIONAL
         </div>
     </div>
 
     <script>
-        const terminal = document.getElementById('terminal');
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
 
-        function logTerminal(msg) {
-            terminal.innerHTML += `<br>C:\\Nando\\Award> ${msg}`;
-            terminal.scrollTop = terminal.scrollHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        const charArray = chars.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
         }
 
-        function bukaEFE() {
-            logTerminal("Membuka Portal English For Everyone...");
-            setTimeout(() => {
-                window.open('https://efeindonesia.com/', '_blank');
-            }, 500);
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#0f0';
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const char = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
         }
 
-        function bukaJH() {
-            logTerminal("Membuka Portal JadiHacker...");
-            setTimeout(() => {
-                window.open('https://jadihacker.com/', '_blank');
-            }, 500);
-        }
+        setInterval(drawMatrix, 50);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Random glitch effect on title
+        setInterval(() => {
+            const title = document.querySelector('.main-title');
+            if (Math.random() > 0.9) {
+                title.style.animation = 'glitch 0.1s infinite';
+                setTimeout(() => {
+                    title.style.animation = 'glitch 3s infinite';
+                }, 200);
+            }
+        }, 1000);
+
+        // Keyboard sound effect (optional visual feedback)
+        document.addEventListener('keydown', (e) => {
+            const key = document.createElement('div');
+            key.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                color: #0f0;
+                font-family: 'Share Tech Mono', monospace;
+                font-size: 1.5rem;
+                text-shadow: 0 0 10px #0f0;
+                animation: fadeOut 1s forwards;
+                z-index: 9999;
+            `;
+            key.textContent = e.key.toUpperCase();
+            document.body.appendChild(key);
+            setTimeout(() => key.remove(), 1000);
+        });
+
+        // Add fadeOut animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
-
 </body>
 </html>
+
